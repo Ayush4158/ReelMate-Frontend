@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0f172a; /* slate-900 */
+    --card-color: #1e293b; /* slate-800 */
+    --text-color: #f1f5f9; /* slate-100 */
+    --accent-color: #3b82f6; /* blue-500 */
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #f8fafc; /* slate-50 */
+    --card-color: #ffffff; /* white */
+    --text-color: #0f172a; /* slate-900 */
+    --accent-color: #2563eb; /* blue-600 */
+  }
+}
