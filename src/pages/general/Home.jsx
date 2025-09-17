@@ -16,7 +16,7 @@ const Home = () => {
   }, []);
 
   const likeVideo = async (item) => {
-    setLikingVideoId(item._id); // disable like button for this video
+    setLikingVideoId(item._id);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/food/like`,
@@ -26,7 +26,13 @@ const Home = () => {
 
       setVideos((prev) =>
         prev.map((v) =>
-          v._id === item._id ? { ...v, likeCount: res.data.likeCount } : v
+          v._id === item._id
+            ? { 
+                ...v, 
+                likeCount: res.data.likeCount,
+                isLiked: true // mark as liked
+              }
+            : v
         )
       );
 
@@ -34,12 +40,12 @@ const Home = () => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to like video");
     } finally {
-      setLikingVideoId(null); // re-enable button
+      setLikingVideoId(null);
     }
   };
 
   const saveVideo = async (item) => {
-    setSavingVideoId(item._id); // disable save button for this video
+    setSavingVideoId(item._id);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/food/save`,
@@ -49,7 +55,13 @@ const Home = () => {
 
       setVideos((prev) =>
         prev.map((v) =>
-          v._id === item._id ? { ...v, saveCount: res.data.saveCount } : v
+          v._id === item._id
+            ? { 
+                ...v, 
+                saveCount: res.data.saveCount,
+                isSaved: true // mark as saved
+              }
+            : v
         )
       );
 
@@ -57,7 +69,7 @@ const Home = () => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to save video");
     } finally {
-      setSavingVideoId(null); // re-enable button
+      setSavingVideoId(null);
     }
   };
 

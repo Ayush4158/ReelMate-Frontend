@@ -88,8 +88,20 @@ const ReelFeed = ({
                       }`}
                       aria-label="Like"
                     >
-                      {isLiking ? (
-                        <span className="animate-spin">❤️</span>
+                      {item.isLiked ? (
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="red"
+                          stroke="red"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="w-6 h-6"
+                        >
+                          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-8.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                        </svg>
                       ) : (
                         <svg
                           width="24"
@@ -121,8 +133,20 @@ const ReelFeed = ({
                       }`}
                       aria-label="Bookmark"
                     >
-                      {isSaving ? (
-                        <span className="animate-spin">🔖</span>
+                      {item.isSaved ? (
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="yellow"
+                          stroke="yellow"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="w-6 h-6"
+                        >
+                          <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z" />
+                        </svg>
                       ) : (
                         <svg
                           width="24"
