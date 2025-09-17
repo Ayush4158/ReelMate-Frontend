@@ -8,18 +8,15 @@ const Saved = () => {
   const [loading, setLoading] = useState(true);
   const [savingVideoId, setSavingVideoId] = useState(null);
 
-  // Fetch saved videos
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/food/saved-video`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        const data = response.data.savedVideo.map((v) => ({
+      .get(`${import.meta.env.VITE_API_URL}/api/food/saved-video`, { withCredentials: true })
+      .then((res) => {
+        const data = res.data.savedVideo.map(v => ({
           ...v,
-          isLiked: v.isLiked || false,   // keep liked state
-          isSaved: true,                 // all are saved
+          isLiked: v.isLiked || false,
+          isSaved: true,
         }));
         setVideos(data);
       })
@@ -27,7 +24,6 @@ const Saved = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Remove saved video
   const removeSaved = async (item) => {
     setSavingVideoId(item._id);
     try {
@@ -37,8 +33,13 @@ const Saved = () => {
         { withCredentials: true }
       );
 
-      // Remove the unsaved video from state
-      setVideos((prev) => prev.filter((v) => v._id !== item._id));
+      setVideos((prev) =>
+        prev.map(v =>
+          v._id === item._id
+            ? { ...v, isSaved: res.data.isSaved, saveCount: res.data.saveCount }
+            : v
+        ).filter(v => v.isSaved)
+      );
 
       toast.success(res.data.message);
     } catch (error) {

@@ -17,7 +17,6 @@ const ReelFeed = ({
         entries.forEach((entry) => {
           const video = entry.target;
           if (!(video instanceof HTMLVideoElement)) return;
-
           if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
             video.play().catch(() => {});
           } else {
@@ -63,7 +62,6 @@ const ReelFeed = ({
               className="relative w-full h-screen flex items-center justify-center bg-black snap-start"
               role="listitem"
             >
-              {/* Video */}
               <video
                 ref={setVideoRef(item._id)}
                 className="w-full h-full object-cover"
@@ -74,7 +72,6 @@ const ReelFeed = ({
                 preload="metadata"
               />
 
-              {/* Overlay */}
               <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
                 {/* Actions */}
                 <div className="absolute right-4 bottom-28 flex flex-col items-center space-y-6 text-white">
@@ -118,9 +115,7 @@ const ReelFeed = ({
                         </svg>
                       )}
                     </button>
-                    <div className="text-sm mt-1">
-                      {item.likeCount ?? item.likesCount ?? item.likes ?? 0}
-                    </div>
+                    <div className="text-sm mt-1">{item.likeCount ?? 0}</div>
                   </div>
 
                   {/* Save */}
@@ -163,18 +158,13 @@ const ReelFeed = ({
                         </svg>
                       )}
                     </button>
-                    <div className="text-sm mt-1">
-                      {item.saveCount ?? item.bookmarks ?? item.saves ?? 0}
-                    </div>
+                    <div className="text-sm mt-1">{item.saveCount ?? 0}</div>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="absolute bottom-28 left-4 text-white max-w-md">
-                  <p
-                    className="text-sm mb-2 line-clamp-2"
-                    title={item.description}
-                  >
+                  <p className="text-sm mb-2 line-clamp-2" title={item.description}>
                     {item.description}
                   </p>
                   {item.foodPartner && (
