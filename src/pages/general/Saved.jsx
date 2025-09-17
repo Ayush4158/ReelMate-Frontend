@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReelFeed from "../../components/ReelFeed";
 import axios from 'axios'
+import { toast } from "react-toastify";
 
 const Saved = () => {
   const [videos, setVideos] = useState([]);
@@ -18,7 +19,7 @@ useEffect(() => {
 
 const removeSaved = async (item) => {
   try {
-    await axios.post(
+    const res = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/food/save`,
       { foodId: item._id },
       { withCredentials: true }
@@ -26,8 +27,10 @@ const removeSaved = async (item) => {
 
     // ✅ Remove the unsaved video from the state array
     setVideos((prev) => prev.filter((v) => v._id !== item._id));
+
+    toast.success(res.data.message)
   } catch (error) {
-    console.error("Error removing saved video:", error);
+    toast.error(error.message);
   }
 };
 

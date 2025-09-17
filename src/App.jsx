@@ -3,6 +3,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import AppRoutes from "./routes/AppRoutes";
 import { loginUser, loginPartner, logoutUser, logoutPartner } from "./slices/AuthSlice";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +44,22 @@ function App() {
     checkSession();
   }, [dispatch]);
 
-  return <AppRoutes />;
+  return <>
+  <AppRoutes />
+  <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick={false}
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+    transition={Bounce}
+  />
+  </>;
 }
 
 export default App;

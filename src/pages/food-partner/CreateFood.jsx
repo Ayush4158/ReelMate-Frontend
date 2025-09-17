@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const CreateFood = () => {
   const [name, setName] = useState("");
@@ -33,7 +34,6 @@ const CreateFood = () => {
   const openFileDialog = () => fileInputRef.current?.click();
 
   const handleSubmit = async (e) => {
-    console.log("start")
   e.preventDefault();
   try {
     console.log("starting")
@@ -47,15 +47,13 @@ const CreateFood = () => {
       formData,
       { withCredentials: true }
     );
-
-    console.log(res.data);
-    alert("Food created successfully!");
+    toast.success(res.data.message)
     setName("");
     setDescription("");
     setVideoFile(null);
   } catch (err) {
-    console.error(err);
-    alert("Failed to create food. Please try again.");
+    toast.error("Failed to create food. Please try again.");
+    toast.error("Error: ", err.message);
   }
 };
 
