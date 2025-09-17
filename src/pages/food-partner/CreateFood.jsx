@@ -35,27 +35,36 @@ const CreateFood = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  try {
-    console.log("starting")
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("video", videoFile);
 
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/food`,
-      formData,
-      { withCredentials: true }
+  if (!videoFile) {
+    toast.error("Please select a video before submitting.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("description", description);
+  formData.append("video", videoFile);
+
+  try {
+    await toast.promise(
+      axios.post(`${import.meta.env.VITE_API_URL}/api/food`, formData, { withCredentials: true }),
+      {
+        pending: "Uploading video...",
+        success: "Food created successfully 🎉",
+        error: "Failed to create food. Please try again ❌",
+      }
     );
-    toast.success(res.data.message)
+
     setName("");
     setDescription("");
     setVideoFile(null);
   } catch (err) {
-    toast.error("Failed to create food. Please try again.");
-    toast.error("Error: ", err.message);
+    console.error("Upload failed:", err);
+    toast.error(`Error: ${err.message}`);
   }
 };
+
 
 
   return (
