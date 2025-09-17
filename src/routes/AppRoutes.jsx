@@ -24,7 +24,7 @@ const AppRoutes = () => {
 
                 <Route path="/" element={<ProtectedRoute type="both"><Home /><BottomNav /></ProtectedRoute>} />
                 <Route path="/saved" element={<ProtectedRoute type="both"><Saved /><BottomNav /></ProtectedRoute>} />
-                <Route path="/create-food" element={<ProtectedRoute type="partner"><CreateFood /></ProtectedRoute>} />
+                <Route path="/create-food" element={<ProtectedRoute type="partner"><CreateFood /><BottomNav/></ProtectedRoute>} />
                 <Route path="/food-partner/:id" element={<ProtectedRoute type="both"><Profile /></ProtectedRoute>} />
             </Routes>
         </Router>

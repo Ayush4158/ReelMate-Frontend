@@ -41,7 +41,7 @@ const ReelFeed = ({
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden">
       <div
-        className="snap-y snap-mandatory overflow-y-scroll h-full w-full pb-[6rem] scroll-smooth"
+        className="snap-y snap-mandatory overflow-y-scroll h-full w-full pb-24 scroll-smooth"
         style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
         role="list"
       >
@@ -71,7 +71,7 @@ const ReelFeed = ({
             {/* Overlay */}
             <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
               {/* Actions */}
-              <div className="absolute right-4 bottom-[7rem] flex flex-col items-center space-y-6 text-white">
+              <div className="absolute right-4 bottom-28 flex flex-col items-center space-y-6 text-white">
                 {/* Like */}
                 <div className="flex flex-col items-center">
                   <button
@@ -126,7 +126,7 @@ const ReelFeed = ({
               </div>
 
               {/* Content */}
-              <div className="absolute bottom-[6rem] left-4 text-white max-w-md">
+              <div className="absolute bottom-28 left-4 text-white max-w-md">
                 <p className="text-sm mb-2 line-clamp-2" title={item.description}>
                   {item.description}
                 </p>
